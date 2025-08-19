@@ -48,7 +48,7 @@ Private Declare Function SHCreateDirectoryEx Lib "shell32.dll" Alias "SHCreateDi
                         (ByVal hwnd As LongPtr, ByVal pszPath As String, ByVal psa As LongPtr) As Long
 #End If
 
-Private Type VersionType '---–{“–‚ÍƒNƒ‰ƒXƒIƒuƒWƒFƒNƒg‚É‚µ‚½‚¢‚¯‚Ç‚±‚ê‚¾‚¯‚Ì‚½‚ß‚Éƒ‚ƒWƒ…[ƒ‹ì‚è‚½‚­‚È‚¢
+Private Type VersionType '---æœ¬å½“ã¯ã‚¯ãƒ©ã‚¹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«ã—ãŸã„ã‘ã©ã“ã‚Œã ã‘ã®ãŸã‚ã«ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ä½œã‚ŠãŸããªã„
     Major As Long
     Minor As Long
     Build As Long
@@ -61,11 +61,11 @@ Dim workPath As String
 Dim objFso As New Scripting.FileSystemObject
 Public Function ChromeDriverAutoUpdate(Optional ByVal ForcedExecution As Boolean = False) As Boolean
 '====================================================================================================
-'chrome.exe‚Æchromedriver.exe‚Ìƒo[ƒWƒ‡ƒ“‚ğ”äŠr‚µ‚Ächromedriver‚ğ©“®XV‚·‚é
-'‚à‚µ‚­‚Í‹­§Àsƒtƒ‰ƒOiForcedExecutionj‚ªTrue‚Å‚àÀs‚·‚é
+'chrome.exeã¨chromedriver.exeã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã‚’æ¯”è¼ƒã—ã¦chromedriverã‚’è‡ªå‹•æ›´æ–°ã™ã‚‹
+'ã‚‚ã—ãã¯å¼·åˆ¶å®Ÿè¡Œãƒ•ãƒ©ã‚°ï¼ˆForcedExecutionï¼‰ãŒTrueã§ã‚‚å®Ÿè¡Œã™ã‚‹
 '====================================================================================================
-    Dim chromePath As String '---chrome.exe‚ª•Û‘¶‚³‚ê‚Ä‚¢‚éƒpƒX
-    Dim chromeFullpath As String '---chrome.exe‚Ü‚ÅŠÜ‚ß‚½ƒtƒ‹ƒpƒX
+    Dim chromePath As String '---chrome.exeãŒä¿å­˜ã•ã‚Œã¦ã„ã‚‹ãƒ‘ã‚¹
+    Dim chromeFullpath As String '---chrome.exeã¾ã§å«ã‚ãŸãƒ•ãƒ«ãƒ‘ã‚¹
     Dim chromeVersion As VersionType
     Dim chromedriverPath As String
     Dim chromedriverFullPath As String
@@ -73,19 +73,19 @@ Public Function ChromeDriverAutoUpdate(Optional ByVal ForcedExecution As Boolean
     Dim lngRevision As Long
     Dim targetRevision As Long
     
-    ' ---chromedriver‚ğƒ_ƒEƒ“ƒ[ƒh—p‚ÌƒtƒHƒ‹ƒ_‚ğì¬‚·‚é@¦Python‚É‡‚í‚¹‚Ä‚é
+    ' ---chromedriverã‚’ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ç”¨ã®ãƒ•ã‚©ãƒ«ãƒ€ã‚’ä½œæˆã™ã‚‹ã€€â€»Pythonã«åˆã‚ã›ã¦ã‚‹
     workPath = Environ("USERPROFILE") & "\.cache\selenium\seleniumbasic"
     Select Case SHCreateDirectoryEx(0&, workPath, 0&)
         Case 0:
-            ' ---ì¬¬Œ÷
+            ' ---ä½œæˆæˆåŠŸ
         Case 183
-            ' ---ì¬Ï‚İ
+            ' ---ä½œæˆæ¸ˆã¿
         Case Else:
-            ' ---ì¬‚Å‚«‚È‚©‚Á‚½
-            MsgBox "ƒ_ƒEƒ“ƒ[ƒh—pƒtƒHƒ‹ƒ_‚ğì¬‚Å‚«‚Ü‚¹‚ñ‚Å‚µ‚½" & vbCrLf & Error(Err), vbCritical
+            ' ---ä½œæˆã§ããªã‹ã£ãŸæ™‚
+            MsgBox "ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ç”¨ãƒ•ã‚©ãƒ«ãƒ€ã‚’ä½œæˆã§ãã¾ã›ã‚“ã§ã—ãŸ" & vbCrLf & Error(Err), vbCritical
     End Select
     
-    '---chrome–{‘Ì‚ÌƒtƒHƒ‹ƒ_‚ğ’T‚·
+    '---chromeæœ¬ä½“ã®ãƒ•ã‚©ãƒ«ãƒ€ã‚’æ¢ã™
     Select Case True
         Case objFso.FolderExists(Environ("ProgramW6432") & "\Google\Chrome\Application")
             chromePath = Environ("ProgramW6432") & "\Google\Chrome\Application"
@@ -94,20 +94,20 @@ Public Function ChromeDriverAutoUpdate(Optional ByVal ForcedExecution As Boolean
         Case objFso.FolderExists(Environ("LOCALAPPDATA") & "\Google\Chrome\Application")
             chromePath = Environ("LOCALAPPDATA") & "\Google\Chrome\Application"
         Case Else
-            MsgBox "'chrome'ƒtƒHƒ‹ƒ_‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ", vbCritical
+            MsgBox "'chrome'ãƒ•ã‚©ãƒ«ãƒ€ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“", vbCritical
             ChromeDriverAutoUpdate = False
             Exit Function
     End Select
     
-    '---”O‚Ì‚½‚ßchrome.exe‚ğŠm”F‚·‚é
+    '---å¿µã®ãŸã‚chrome.exeã‚’ç¢ºèªã™ã‚‹
     If objFso.FileExists(chromePath & "\chrome.exe") = True Then
         chromeFullpath = chromePath & "\chrome.exe"
     Else
-        MsgBox "'chrome.exe'‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ", vbCritical
+        MsgBox "'chrome.exe'ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“", vbCritical
         Exit Function
     End If
     
-    '---SeleniumBasic‚ÌƒtƒHƒ‹ƒ_‚ğ’T‚·
+    '---SeleniumBasicã®ãƒ•ã‚©ãƒ«ãƒ€ã‚’æ¢ã™
     Select Case True
         Case objFso.FolderExists(Environ("ProgramW6432") & "\SeleniumBasic")
             chromedriverPath = Environ("ProgramW6432") & "\SeleniumBasic"
@@ -116,36 +116,35 @@ Public Function ChromeDriverAutoUpdate(Optional ByVal ForcedExecution As Boolean
         Case objFso.FolderExists(Environ("LOCALAPPDATA") & "\SeleniumBasic")
             chromedriverPath = Environ("LOCALAPPDATA") & "\SeleniumBasic"
         Case Else
-            MsgBox "'SeleniumBasic'‚ÌƒtƒHƒ‹ƒ_‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ", vbCritical
+            MsgBox "'SeleniumBasic'ã®ãƒ•ã‚©ãƒ«ãƒ€ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“", vbCritical
             ChromeDriverAutoUpdate = False
             Exit Function
     End Select
     
-    '---”O‚Ì‚½‚ßchromedriver.exe‚ğŠm”F‚·‚é
+    '---å¿µã®ãŸã‚chromedriver.exeã‚’ç¢ºèªã™ã‚‹
     If objFso.FileExists(chromedriverPath & "\chromedriver.exe") = True Then
         chromedriverFullPath = chromedriverPath & "\chromedriver.exe"
     Else
-        MsgBox "'chromedriver.exe'‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ", vbCritical
+        MsgBox "'chromedriver.exe'ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“", vbCritical
         ChromeDriverAutoUpdate = False
         Exit Function
     End If
-    Set objFso = Nothing
         
-    '---chrome.exe‚Ìƒo[ƒWƒ‡ƒ“‚ğæ“¾‚·‚é
-    If GetChromeVersion(chromeFullpath, chromeVersion) = False Then '---chrome.exe‚Ìƒo[ƒWƒ‡ƒ“‚ğæ“¾‚·‚é
-        MsgBox "'chrome.exe'‚Ìƒo[ƒWƒ‡ƒ“‚ªæ“¾‚Å‚«‚Ü‚¹‚ñ‚Å‚µ‚½", vbCritical
+    '---chrome.exeã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã‚’å–å¾—ã™ã‚‹
+    If GetChromeVersion(chromeFullpath, chromeVersion) = False Then '---chrome.exeã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã‚’å–å¾—ã™ã‚‹
+        MsgBox "'chrome.exe'ã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³ãŒå–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸ", vbCritical
         ChromeDriverAutoUpdate = False
         Exit Function
     End If
     
-    '---chrome.exe‚Ìƒo[ƒWƒ‡ƒ“‚É‡‚í‚¹‚½chromedriver.exe‚ğƒ_ƒEƒ“ƒ[ƒh‚·‚é
-    If ChromedriverCheck(chromedriverPath, chromeVersion) = False Then '---chromedriver‚Ìƒo[ƒWƒ‡ƒ“‚ğæ“¾‚·‚é
-        MsgBox "'chromedriver.exe'‚Ìƒo[ƒWƒ‡ƒ“‚ªæ“¾‚Å‚«‚Ü‚¹‚ñ‚Å‚µ‚½", vbCritical
+    '---chrome.exeã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã«åˆã‚ã›ãŸchromedriver.exeã‚’ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ã™ã‚‹
+    If ChromedriverCheck(chromedriverPath, chromeVersion) = False Then '---chromedriverã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã‚’å–å¾—ã™ã‚‹
+        MsgBox "'chromedriver.exe'ã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³ãŒå–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸ", vbCritical
         ChromeDriverAutoUpdate = False
         Exit Function
     End If
     
-    '---—˜—p‚·‚échromedriver‚Ìƒo[ƒWƒ‡ƒ“‚ğ’T‚·¦ƒŠƒrƒWƒ‡ƒ“‚ªchromeˆÈ‰º‚Ìƒo[ƒWƒ‡ƒ“‚Ì’†‚ÅÅV‚ğg‚¤
+    '---åˆ©ç”¨ã™ã‚‹chromedriverã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã‚’æ¢ã™â€»ãƒªãƒ“ã‚¸ãƒ§ãƒ³ãŒchromeä»¥ä¸‹ã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã®ä¸­ã§æœ€æ–°ã‚’ä½¿ã†
     On Error GoTo ErrLabel
         targetRevision = 0
         For Each objFolder In objFso.GetFolder(workPath).SubFolders
@@ -163,47 +162,47 @@ Public Function ChromeDriverAutoUpdate(Optional ByVal ForcedExecution As Boolean
         Call objFso.GetFile(workPath & "\" & chromeVersion.BuildVersion & "." & CStr(targetRevision) & "\chromedriver.exe").Copy(chromedriverPath & "\chromedriver.exe", True)
     On Error GoTo 0
     
-    '---Œ‹‰Ê‚Æ‚µ‚ÄXV‚µ‚Ä‚¢‚È‚¢ê‡‚à‚ ‚é‚ªAXV¸”s‚¶‚á‚È‚­‚ÄXV•s—v‚È”»’è‚¾‚©‚çTrue‚ğ•Ô‚·
+    '---çµæœã¨ã—ã¦æ›´æ–°ã—ã¦ã„ãªã„å ´åˆã‚‚ã‚ã‚‹ãŒã€æ›´æ–°å¤±æ•—ã˜ã‚ƒãªãã¦æ›´æ–°ä¸è¦ãªåˆ¤å®šã ã‹ã‚‰Trueã‚’è¿”ã™
     ChromeDriverAutoUpdate = True
 Exit Function
-ErrLabel:     '---—\Šú‚¹‚ÊƒGƒ‰[‚Ì•ªŠò
-    MsgBox "chromedriver ‚Ì“ü‘Ö‚É¸”s‚µ‚Ü‚µ‚½" & vbCrLf & Error(Err) & vbCrLf & "¦‚±‚Ì‰æ–Ê‚ÌƒLƒƒƒvƒ`ƒƒ‚ğì¬Ò‚Ö‘—‚Á‚Ä‚­‚¾‚³‚¢"
+ErrLabel:     '---äºˆæœŸã›ã¬ã‚¨ãƒ©ãƒ¼ã®åˆ†å²
+    MsgBox "chromedriver ã®å…¥æ›¿ã«å¤±æ•—ã—ã¾ã—ãŸ" & vbCrLf & Error(Err) & vbCrLf & "â€»ã“ã®ç”»é¢ã®ã‚­ãƒ£ãƒ—ãƒãƒ£ã‚’ä½œæˆè€…ã¸é€ã£ã¦ãã ã•ã„"
     ChromeDriverAutoUpdate = False
 End Function
 Private Function GetChromeVersion(ByVal chromeFullpath As String, ByRef chromeVersion As VersionType) As Boolean
 '====================================================================================================
-'PowerShell‚Åchrome.exe‚Ìƒo[ƒWƒ‡ƒ“î•ñ‚ğæ“¾‚·‚é@¦ˆêuPowerShell‚ª—§‚¿ã‚ª‚é
+'PowerShellã§chrome.exeã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³æƒ…å ±ã‚’å–å¾—ã™ã‚‹ã€€â€»ä¸€ç¬PowerShellãŒç«‹ã¡ä¸ŠãŒã‚‹
 '====================================================================================================
     Dim command As String
     Dim objRet As Object
     
     On Error GoTo ErrLabel
-        '---chromeƒo[ƒWƒ‡ƒ“î•ñ‚Ì‰Šú’l
+        '---chromeãƒãƒ¼ã‚¸ãƒ§ãƒ³æƒ…å ±ã®åˆæœŸå€¤
         chromeVersion.Major = 1
         chromeVersion.Minor = 0
         chromeVersion.Build = 0
         chromeVersion.Revision = 0
-        '---chrome.exe‚Ìƒo[ƒWƒ‡ƒ“‚ğæ“¾‚·‚éPowerShellƒRƒ}ƒ“ƒh
+        '---chrome.exeã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã‚’å–å¾—ã™ã‚‹PowerShellã‚³ãƒãƒ³ãƒ‰
         command = "powershell.exe -NoProfile -ExecutionPolicy Bypass (Get-Item -Path '" & chromeFullpath & "').VersionInfo.FileVersion"
-        '---PowerShell‚ÌÀsŒ‹‰Ê‚ğƒZƒbƒg
+        '---PowerShellã®å®Ÿè¡Œçµæœã‚’ã‚»ãƒƒãƒˆ
         Set objRet = CreateObject("WScript.Shell").Exec(command)
-        '---PowerShell‚ÌƒRƒ}ƒ“ƒhƒŒƒbƒg‚ÌÀsŒ‹‰Ê‚ğæ“¾
+        '---PowerShellã®ã‚³ãƒãƒ³ãƒ‰ãƒ¬ãƒƒãƒˆã®å®Ÿè¡Œçµæœã‚’å–å¾—
         chromeVersion.RevisionVersion = Trim(objRet.StdOut.ReadAll)
-        '---î•ñ‚Ìæ“¾‚ªI‚í‚Á‚½‚çƒIƒuƒWƒFƒNƒg‚ğƒNƒŠƒA‚·‚é
+        '---æƒ…å ±ã®å–å¾—ãŒçµ‚ã‚ã£ãŸã‚‰ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ã‚¯ãƒªã‚¢ã™ã‚‹
         Set objRet = Nothing
-        '---‰üsƒR[ƒh‚ªŠÜ‚Ü‚ê‚Ä‚¢‚é‚©‚çíœ‚·‚é
+        '---æ”¹è¡Œã‚³ãƒ¼ãƒ‰ãŒå«ã¾ã‚Œã¦ã„ã‚‹ã‹ã‚‰å‰Šé™¤ã™ã‚‹
         chromeVersion.RevisionVersion = Trim(Replace(Replace(Replace(chromeVersion.RevisionVersion, vbCrLf, vbNullString), vbCr, vbNullString), vbLf, vbNullString))
-        '---ƒo[ƒWƒ‡ƒ“î•ñ‚ğ•ª‚¯‚Ä•Ô‚·
-        With CreateObject("VBScript.RegExp") '---³‹K•\Œ»‚Ì€”õ
+        '---ãƒãƒ¼ã‚¸ãƒ§ãƒ³æƒ…å ±ã‚’åˆ†ã‘ã¦è¿”ã™
+        With CreateObject("VBScript.RegExp") '---æ­£è¦è¡¨ç¾ã®æº–å‚™
             .Pattern = "\d+\.\d+\.\d+(\.\d+)?"
             .Global = True
-            If .test(chromeVersion.RevisionVersion) Then '---”O‚Ì‚½‚ß³‹K•\Œ»‚Åƒo[ƒWƒ‡ƒ“î•ñ‚ğƒ`ƒFƒbƒN‚·‚é
+            If .test(chromeVersion.RevisionVersion) Then '---å¿µã®ãŸã‚æ­£è¦è¡¨ç¾ã§ãƒãƒ¼ã‚¸ãƒ§ãƒ³æƒ…å ±ã‚’ãƒã‚§ãƒƒã‚¯ã™ã‚‹
                 chromeVersion.Major = CLng(Split(chromeVersion.RevisionVersion, ".")(0))
                 chromeVersion.Minor = CLng(Split(chromeVersion.RevisionVersion, ".")(1))
                 chromeVersion.Build = CLng(Split(chromeVersion.RevisionVersion, ".")(2))
-                If UBound(Split(chromeVersion.RevisionVersion, ".")) >= 3 Then chromeVersion.Revision = CLng(Split(chromeVersion.RevisionVersion, ".")(3)) '---ƒŠƒrƒWƒ‡ƒ“”Ô†‚ª‚ ‚ê‚Î¦Šî–{‚ ‚é‚Í‚¸
-                chromeVersion.BuildVersion = Join(Array(chromeVersion.Major, chromeVersion.Minor, chromeVersion.Build), ".") '---ƒŠƒrƒWƒ‡ƒ“‚ğ”`‚¢‚½ƒVƒ‡[ƒgƒo[ƒWƒ‡ƒ“î•ñ‚ğƒZƒbƒg‚·‚é
-            Else '---³‹K•\Œ»•sˆê’v‚È‚ç¸”s‚Å•Ô‚·
+                If UBound(Split(chromeVersion.RevisionVersion, ".")) >= 3 Then chromeVersion.Revision = CLng(Split(chromeVersion.RevisionVersion, ".")(3)) '---ãƒªãƒ“ã‚¸ãƒ§ãƒ³ç•ªå·ãŒã‚ã‚Œã°â€»åŸºæœ¬ã‚ã‚‹ã¯ãš
+                chromeVersion.BuildVersion = Join(Array(chromeVersion.Major, chromeVersion.Minor, chromeVersion.Build), ".") '---ãƒªãƒ“ã‚¸ãƒ§ãƒ³ã‚’è¦—ã„ãŸã‚·ãƒ§ãƒ¼ãƒˆãƒãƒ¼ã‚¸ãƒ§ãƒ³æƒ…å ±ã‚’ã‚»ãƒƒãƒˆã™ã‚‹
+            Else '---æ­£è¦è¡¨ç¾ä¸ä¸€è‡´ãªã‚‰å¤±æ•—ã§è¿”ã™
                 GetChromeVersion = False
                 Exit Function
             End If
@@ -211,8 +210,8 @@ Private Function GetChromeVersion(ByVal chromeFullpath As String, ByRef chromeVe
         GetChromeVersion = True
     On Error GoTo 0
     Exit Function
-ErrLabel:     '---—\Šú‚¹‚ÊƒGƒ‰[‚Ì•ªŠò
-    MsgBox "chrome.exe ‚Ìƒo[ƒWƒ‡ƒ“î•ñæ“¾‚É¸”s‚µ‚Ü‚µ‚½" & vbCrLf & "[" & Error(Err) & "]" & vbCrLf & "¦‚±‚Ì‰æ–Ê‚ÌƒLƒƒƒvƒ`ƒƒ‚ğì¬Ò‚Ö‘—‚Á‚Ä‚­‚¾‚³‚¢"
+ErrLabel:     '---äºˆæœŸã›ã¬ã‚¨ãƒ©ãƒ¼ã®åˆ†å²
+    MsgBox "chrome.exe ã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³æƒ…å ±å–å¾—ã«å¤±æ•—ã—ã¾ã—ãŸ" & vbCrLf & "[" & Error(Err) & "]" & vbCrLf & "â€»ã“ã®ç”»é¢ã®ã‚­ãƒ£ãƒ—ãƒãƒ£ã‚’ä½œæˆè€…ã¸é€ã£ã¦ãã ã•ã„"
     GetChromeVersion = False
 End Function
 Private Function ChromedriverCheck(chromedriverPath, chromeVersion As VersionType) As Boolean
@@ -231,22 +230,22 @@ Private Function ChromedriverCheck(chromedriverPath, chromeVersion As VersionTyp
         With objHttp
             .Open "GET", JSON_ENDPOINTS_URL, False
             .Send
-            Set objRet = JsonConverter.ParseJson(.responseText) '---JSON endpoints ‚©‚çî•ñ‚ğûW‚·‚é
-            '---ƒo[ƒWƒ‡ƒ“î•ñ‚ğÆ‡‚µ‚È‚ª‚çæ“¾‘ÎÛƒ`ƒFƒbƒN‚·‚é
+            Set objRet = JsonConverter.ParseJson(.responseText) '---JSON endpoints ã‹ã‚‰æƒ…å ±ã‚’åé›†ã™ã‚‹
+            '---ãƒãƒ¼ã‚¸ãƒ§ãƒ³æƒ…å ±ã‚’ç…§åˆã—ãªãŒã‚‰å–å¾—å¯¾è±¡ãƒã‚§ãƒƒã‚¯ã™ã‚‹
             For Each objVersion In objRet("versions")
-                '---ƒrƒ‹ƒh‚Ü‚Åˆê’v‚µ‚Ä‚¢‚ê‚Îæ“¾Œó•â‚É‚·‚é
+                '---ãƒ“ãƒ«ãƒ‰ã¾ã§ä¸€è‡´ã—ã¦ã„ã‚Œã°å–å¾—å€™è£œã«ã™ã‚‹
                 If objVersion("version") Like chromeVersion.BuildVersion & "*" Then
-                    '---ŒÃ‚¢î•ñ‚Íchromedriver‚ªƒCƒ“ƒfƒbƒNƒX‚É‚È‚¢ê‡‚ª‚ ‚é‚Ì‚Å”O‚Ì‚½‚ßƒCƒ“ƒfƒbƒNƒXƒ`ƒFƒbƒN‚·‚é
+                    '---å¤ã„æƒ…å ±ã¯chromedriverãŒã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã«ãªã„å ´åˆãŒã‚ã‚‹ã®ã§å¿µã®ãŸã‚ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒã‚§ãƒƒã‚¯ã™ã‚‹
                     For Each idx In objVersion("downloads")
                         If idx = "chromedriver" Then
                             For Each chromedriver In objVersion("downloads")(idx)
-                                '---æ“¾Ï‚İƒtƒHƒ‹ƒ_‚É‚È‚©‚Á‚½‚ç
+                                '---å–å¾—æ¸ˆã¿ãƒ•ã‚©ãƒ«ãƒ€ã«ãªã‹ã£ãŸã‚‰
                                 If objFso.FolderExists(workPath & "\" & objVersion("version")) = False Then
-                                    '---‘ÎÛ‚Ìplatform‚©ƒ`ƒFƒbƒN‚·‚é ¦Winsows11‚©‚ç64bit‚µ‚©‚È‚¢‚Ì‚ÅŒˆ‚ß‘Å‚¿
+                                    '---å¯¾è±¡ã®platformã‹ãƒã‚§ãƒƒã‚¯ã™ã‚‹ â€»Winsows11ã‹ã‚‰64bitã—ã‹ãªã„ã®ã§æ±ºã‚æ‰“ã¡
                                     If chromedriver("platform") = TARGET_PLATFORM Then
                                         url = chromedriver("url")
                                         If DownloadChromedriver(url, objVersion("version")) = False Then
-                                            MsgBox "chromedriver‚Ìƒ_ƒEƒ“ƒ[ƒh‚É¸”s‚µ‚Ü‚µ‚½", vbCritical
+                                            MsgBox "chromedriverã®ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ã«å¤±æ•—ã—ã¾ã—ãŸ", vbCritical
                                             ChromedriverCheck = False
                                             Exit Function
                                         End If
@@ -262,8 +261,8 @@ Private Function ChromedriverCheck(chromedriverPath, chromeVersion As VersionTyp
     On Error GoTo 0
     ChromedriverCheck = True
     Exit Function
-ErrLabel:     '---—\Šú‚¹‚ÊƒGƒ‰[‚Ì•ªŠò
-    MsgBox "chromedriver.exe ‚ÌXV‚É¸”s‚µ‚Ü‚µ‚½" & vbCrLf & "[" & Error(Err) & "]" & vbCrLf & "¦‚±‚Ì‰æ–Ê‚ÌƒLƒƒƒvƒ`ƒƒ‚ğì¬Ò‚Ö‘—‚Á‚Ä‚­‚¾‚³‚¢"
+ErrLabel:     '---äºˆæœŸã›ã¬ã‚¨ãƒ©ãƒ¼ã®åˆ†å²
+    MsgBox "chromedriver.exe ã®æ›´æ–°ã«å¤±æ•—ã—ã¾ã—ãŸ" & vbCrLf & "[" & Error(Err) & "]" & vbCrLf & "â€»ã“ã®ç”»é¢ã®ã‚­ãƒ£ãƒ—ãƒãƒ£ã‚’ä½œæˆè€…ã¸é€ã£ã¦ãã ã•ã„"
     ChromedriverCheck = False
 End Function
 Private Function DownloadChromedriver(ByVal url As String, targetVersion As String) As Boolean
@@ -272,56 +271,56 @@ Private Function DownloadChromedriver(ByVal url As String, targetVersion As Stri
     Dim newDriverPath As String
     Dim objFolder As Scripting.Folder
     downloadPath = workPath & "\" & targetVersion
-    ' ---chromedriver‚ÌƒtƒHƒ‹ƒ_‚ğì¬‚·‚é
+    ' ---chromedriverã®ãƒ•ã‚©ãƒ«ãƒ€ã‚’ä½œæˆã™ã‚‹
     Select Case SHCreateDirectoryEx(0&, downloadPath, 0&)
         Case 0:
-            ' ---ì¬¬Œ÷
+            ' ---ä½œæˆæˆåŠŸ
         Case 183
-            ' ---ì¬Ï‚İ
+            ' ---ä½œæˆæ¸ˆã¿
         Case Else:
-            ' ---ì¬‚Å‚«‚È‚©‚Á‚½
-            MsgBox "ChromeDriver—pƒtƒHƒ‹ƒ_‚ğì¬‚Å‚«‚Ü‚¹‚ñ‚Å‚µ‚½" & vbCrLf & Error(Err), vbCritical
+            ' ---ä½œæˆã§ããªã‹ã£ãŸæ™‚
+            MsgBox "ChromeDriverç”¨ãƒ•ã‚©ãƒ«ãƒ€ã‚’ä½œæˆã§ãã¾ã›ã‚“ã§ã—ãŸ" & vbCrLf & Error(Err), vbCritical
             DownloadChromedriver = False
             Exit Function
     End Select
     
-    '---ƒtƒ@ƒCƒ‹‚ğƒ_ƒEƒ“ƒ[ƒh‚·‚é
+    '---ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ã™ã‚‹
     If URLDownloadToFile(0, url, workPath & "\" & ZIP_FILE, 0, 0) <> 0 Then
-        MsgBox "ChromeDriver‚ğƒ_ƒEƒ“ƒ[ƒh‚Å‚«‚Ü‚¹‚ñ‚Å‚µ‚½" & vbCrLf & Error(Err), vbCritical
+        MsgBox "ChromeDriverã‚’ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ã§ãã¾ã›ã‚“ã§ã—ãŸ" & vbCrLf & Error(Err), vbCritical
         DownloadChromedriver = False
         Exit Function
     End If
     Application.DisplayAlerts = False
-    '---zip‚ğŠù’è‚ÌƒtƒHƒ‹ƒ_‚ÉŒü‚¯‚Ä‰ğ“€‚·‚é
-    With CreateObject("Shell.Application") '---zip‚ğŠù’è‚ÌƒtƒHƒ‹ƒ_‚ÉŒü‚¯‚Ä‰ğ“€‚·‚é
+    '---zipã‚’æ—¢å®šã®ãƒ•ã‚©ãƒ«ãƒ€ã«å‘ã‘ã¦è§£å‡ã™ã‚‹
+    With CreateObject("Shell.Application") '---zipã‚’æ—¢å®šã®ãƒ•ã‚©ãƒ«ãƒ€ã«å‘ã‘ã¦è§£å‡ã™ã‚‹
         .Namespace((downloadPath)).CopyHere .Namespace((workPath & "\" & ZIP_FILE)).Items
     End With
-    '--- ‰ğ“€‚µ‚½ƒtƒHƒ‹ƒ_‚©‚çÄ‹Nˆ—‚µ‚Ächromedriver.exe‚Ìƒtƒ‹ƒpƒX‚ğæ“¾‚·‚é
+    '--- è§£å‡ã—ãŸãƒ•ã‚©ãƒ«ãƒ€ã‹ã‚‰å†èµ·å‡¦ç†ã—ã¦chromedriver.exeã®ãƒ•ãƒ«ãƒ‘ã‚¹ã‚’å–å¾—ã™ã‚‹
     newDriverPath = SearchFilesRecursively(downloadPath & "\", "chromedriver.exe")
     If newDriverPath = "" Then
-        MsgBox "chromedriver.exe ‚ÌXV‚É¸”s‚µ‚Ü‚µ‚½"
+        MsgBox "chromedriver.exe ã®æ›´æ–°ã«å¤±æ•—ã—ã¾ã—ãŸ"
         DownloadChromedriver = False
     End If
-    '---chromedriver‚ğƒo[ƒWƒ‡ƒ“ƒtƒHƒ‹ƒ_’¼‰º‚ÉˆÚ“®‚·‚é
+    '---chromedriverã‚’ãƒãƒ¼ã‚¸ãƒ§ãƒ³ãƒ•ã‚©ãƒ«ãƒ€ç›´ä¸‹ã«ç§»å‹•ã™ã‚‹
     Call objFso.MoveFile(newDriverPath, downloadPath & "\")
-    '---chromedriver‚ª‚È‚­‚È‚Á‚½•s—vƒtƒHƒ‹ƒ_‚ğíœ‚·‚é
+    '---chromedriverãŒãªããªã£ãŸä¸è¦ãƒ•ã‚©ãƒ«ãƒ€ã‚’å‰Šé™¤ã™ã‚‹
     For Each objFolder In objFso.GetFolder(downloadPath).SubFolders
         objFolder.Delete True
     Next
-    '---zipƒtƒ@ƒCƒ‹‚ğíœ‚·‚é
+    '---zipãƒ•ã‚¡ã‚¤ãƒ«ã‚’å‰Šé™¤ã™ã‚‹
     Call objFso.DeleteFile(workPath & "\" & ZIP_FILE, True)
     Application.DisplayAlerts = True
     DownloadChromedriver = True
 End Function
 Function SearchFilesRecursively(ByVal folderPath As String, fileName) As String
 '====================================================================================================
-' folderPath‚ğ‹N“_‚ÉÄ‹Nˆ—‚ÅƒTƒuƒtƒHƒ‹ƒ_‚Ü‚Å‘ÎÛ‚É‚µ‚ÄfileName‚ğ’T‚µ‚Äƒtƒ‹ƒpƒX‚ğ•Ô‚·
+' folderPathã‚’èµ·ç‚¹ã«å†èµ·å‡¦ç†ã§ã‚µãƒ–ãƒ•ã‚©ãƒ«ãƒ€ã¾ã§å¯¾è±¡ã«ã—ã¦fileNameã‚’æ¢ã—ã¦ãƒ•ãƒ«ãƒ‘ã‚¹ã‚’è¿”ã™
 '====================================================================================================
     Dim objFolder As Scripting.Folder
     Dim subFolder As Scripting.Folder
     Dim objFile As Scripting.File
     
-    ' ƒtƒ@ƒCƒ‹ˆê——•\¦
+    ' ãƒ•ã‚¡ã‚¤ãƒ«ä¸€è¦§è¡¨ç¤º
     For Each objFile In objFso.GetFolder(folderPath).Files
         If objFile.Name = fileName Then
             SearchFilesRecursively = objFile.Path
@@ -329,7 +328,7 @@ Function SearchFilesRecursively(ByVal folderPath As String, fileName) As String
         End If
     Next objFile
     
-    ' ƒTƒuƒtƒHƒ‹ƒ_‚ğÄ‹A“I‚É’Tõ
+    ' ã‚µãƒ–ãƒ•ã‚©ãƒ«ãƒ€ã‚’å†å¸°çš„ã«æ¢ç´¢
     For Each subFolder In objFso.GetFolder(folderPath).SubFolders
         If SearchFilesRecursively(subFolder.Path, fileName) = subFolder.Path & "\" & fileName Then
             SearchFilesRecursively = subFolder.Path & "\" & fileName
